@@ -7,34 +7,37 @@ function addCssFileToHead(params) {
 }
 
 class ImagesPage {
-	currentImage = 0
-	images = [
-		{
-			src: 'assets/images/ss-5.jpg',
-			class: 'image active',
-			style: 'transform: rotate(270deg);',
-		},
-		{
-			src: 'assets/images/ss-2.jpg',
-			class: 'image',
-			style: 'transform: rotate(270deg);',
-		},
-		{
-			src: 'assets/images/ss-3.jpg',
-			class: 'image',
-			style: 'transform: rotate(270deg);',
-		},
-		{
-			src: 'assets/images/ss-4.jpg',
-			class: 'image',
-		},
-		{
-			src: 'assets/images/ss-1.jpg',
-			class: 'image',
-			style: 'transform: rotate(270deg);',
-		},
-	]
-	imagesLength = this.images.length
+	constructor() {
+		this.currentImage = 0;
+		this.images = [
+			{
+				src: 'assets/images/ss-5.jpg',
+				class: 'image active',
+				style: 'transform: rotate(270deg);',
+			},
+			{
+				src: 'assets/images/ss-2.jpg',
+				class: 'image',
+				style: 'transform: rotate(270deg);',
+			},
+			{
+				src: 'assets/images/ss-3.jpg',
+				class: 'image',
+				style: 'transform: rotate(270deg);',
+			},
+			{
+				src: 'assets/images/ss-4.jpg',
+				class: 'image',
+			},
+			{
+				src: 'assets/images/ss-1.jpg',
+				class: 'image',
+				style: 'transform: rotate(270deg);',
+			},
+		];
+		this.imagesLength = this.images.length;
+	}
+	
 
 	init() {
 		const backgroundElement = document.querySelector('.full-background');
