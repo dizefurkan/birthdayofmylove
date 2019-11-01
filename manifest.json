@@ -1,0 +1,21 @@
+{
+  "short_name": "SS",
+  "name": "Sümeyye Üçüncü - Doğum Günü",
+  "icons": [
+    {
+      "src": "/assets/images/logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/images/logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#000000",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#000000"
+}
