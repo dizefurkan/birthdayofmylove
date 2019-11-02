@@ -182,6 +182,20 @@ class CountDown {
 			speed: 100
 		});
 		typeWriter.typewriter();
+		setTimeout(() => {
+			$('.modal').append(`<img src="assets/images/ss-5.jpg">`);
+			$(document).on('click', '.modal img', () => {
+				$('.modal').append(`<p id="imageText" class="typed-text--font-family"></p>`);
+				var typeWriter, texts;
+				texts = ["Güzel yüzün ve gözlerin, bunlar beni mutlu eder :)"]
+				typeWriter = new TypeWriter({
+					words: texts,
+					elementId: 'imageText',
+					speed: 150
+				});
+				typeWriter.typewriter();
+			})
+		}, 3000)
 	}
 
 	handleClick(selector, callback) {

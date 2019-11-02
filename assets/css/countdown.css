@@ -204,6 +204,36 @@ header a, a:visited {
   animation-fill-mode: forwards;
 }
 
+.modal img {
+  margin: auto;
+  transform: rotateZ(270deg);
+  margin-top: 100px;
+  display: block;
+  animation: modal-image 3s;
+  animation-delay: 8s;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+		width: 100%;
+	opacity: 0;
+}
+
+.modal p {
+	display: block;
+  bottom: 20px;
+  position: absolute;
+  color: #fff;
+  left: 20px;
+}
+
+@keyframes modal-image {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
 @keyframes height {
   from {
   	height: 50px;
