@@ -10,7 +10,9 @@
   height: 100vh;
   align-items: center;
 }
-#countdown h1 {
+#countdown h1,
+#namesurname {
+	z-index: 1;
   color: #ffffff;
   font-family: 'PT Sans', sans-serif;
 }
@@ -134,4 +136,57 @@ header a, a:visited {
   -o-animation:move-clouds-back 200s linear infinite;
   -webkit-animation:move-clouds-back 200s linear infinite;
   animation:move-clouds-back 200s linear infinite;
+}
+
+/* Birthday */
+
+.birthday {
+	position: absolute;
+	top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.birthday canvas{
+	display: block;
+	position: absolute;
+  top: 0;
+
+}
+.birthday h5 {
+  color: #fff;
+  font-family: "Source Sans Pro";
+  font-weight: 900;
+  -webkit-user-select: none;
+  user-select: none;
+	display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  z-index: 1;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Merienda+One&display=swap');
+.typed-text--font-family {
+	font-family: 'Merienda One', cursive !important;
+}
+#typedtext {
+	font-size: 18px;
+	font-weight: bold;
+	position: absolute;
+	margin: 10px;
+	text-align: center;
+  color: #fff;
+  top: 0;
+  z-index: 1;
+  background: #000000;
+  border: 1px solid;
+}
+
+.message-box {
+	z-index: 10;
+  color: #fff;
+  position: absolute;
 }

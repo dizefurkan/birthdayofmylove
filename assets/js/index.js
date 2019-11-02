@@ -6,6 +6,17 @@ function addCssFileToHead(params) {
 	document.getElementsByTagName('head')[0].appendChild(link);
 }
 
+class Router {
+	constructor() {
+		// super();
+
+	}
+
+	changeRouter() {
+
+	}
+}
+
 class ImagesPage {
 	constructor() {
 		this.currentImage = 0;
@@ -37,7 +48,6 @@ class ImagesPage {
 		];
 		this.imagesLength = this.images.length;
 	}
-	
 
 	init() {
 		const backgroundElement = document.querySelector('.full-background');
@@ -77,26 +87,34 @@ class ImagesPage {
 }
 
 class CountDown {
-	init() {
+	constructor() {
 		addCssFileToHead({
 			rel: "stylesheet",
 			href: "assets/css/countdown.css"
 		});
-		this.countdown('02/11/2019 00:00:00 AM');
+		this.expireDate = '01/11/2019 00:00:00 AM';
+		this.checkDate();
 	}
 
-	countdown(expireDate) {
+	init() {
+		this.countdown();
+	}
+
+	checkDate() {
+		const currentTime = moment().unix();
+    const eventTime = moment(this.expireDate, 'DD-MM-YYYY HH:mm:ss').unix();
+	  this.diffTime = eventTime - currentTime;
+  	this.expired = this.diffTime < 0 ? true : false ;
+	}
+
+	countdown() {
 	  var
 	    $clock = $('#clock'),
-	    eventTime = moment(expireDate, 'DD-MM-YYYY HH:mm:ss').unix(),
-	    currentTime = moment().unix(),
-	    diffTime = eventTime - currentTime,
-	    duration = moment.duration(diffTime * 1000, 'milliseconds'),
+	    duration = moment.duration(this.diffTime * 1000, 'milliseconds'),
 	    interval = 1000;
 
 	  // if time to countdown
-	  if(diffTime > 0) {
-
+	  if(this.diffTime > 0) {
 	    // Show clock
 	    // $clock.show();
 
@@ -106,7 +124,15 @@ class CountDown {
 		    $m = $('<div class="minutes"></div>').appendTo($clock),
 		    $s = $('<div class="seconds"></div>').appendTo($clock);
 
-	    setInterval(() => {
+	    this.counter = setInterval(() => {
+			  if(this.diffTime < 0) {
+			  	this.expired = true;
+			  	// activeRoute = 'content';
+			  	if (this.expired) {
+			  		clearInterval(this.counter);
+			  	}
+			  	return;
+			  }
 	      duration = moment.duration(duration.asMilliseconds() - interval, 'milliseconds');
 	      var
 		      d = moment.duration(duration).days(),
@@ -124,30 +150,101 @@ class CountDown {
         $m.text(`${m} dakika`);
         $s.text(`${s} saniye`);
       }, interval);
-	  };
+	  } else {
+	  	clearInterval(this.counter);
+	  	this.expired = true;
+	  	runBirthday();
+	  	var typeWriter, texts;
+			
+			texts = ["SÜMEYYE ÜÇÜNCÜ"]
+			typeWriter = new TypeWriter({
+				words: texts,
+				elementId: 'namesurname',
+				speed: 150
+			});
+			typeWriter.typewriter();
+	  	// activeRoute = 'content';
+	  	// renderApp();
+	  }
+	}
+
+	showMessage() {
+		const element = `<div id="typedtext" class="typed-text--font-family"></div>`;
+		$('.message-box').remove();
+		$('.birthday').append(element);
+  	const texts = ["İyi ki doğdun sevgilim, birlikte nice senelere, sağlıkla ve mutlulukla :)",
+  	"imza: said furkan dize"]
+		const typeWriter = new TypeWriter({
+			words: texts,
+			elementId: 'typedtext',
+			speed: 100
+		});
+		typeWriter.typewriter();
+	}
+
+	handleClick(selector, callback) {
+		$(document).on('click', selector, callback);
+	}
+
+	render() {
+		this.handleClick('.message-box', this.showMessage);
+		setTimeout(() => {
+			$('.birthday').append(`<div class="message-box">BİR ADET MESAJINIZ VAR</div>`);
+		}, 3000)
+
+		const birthdayTemplate = `
+			<div class="birthday">
+				<canvas id="birthday"></canvas>
+			</div>
+		`;
+		
+// <h1>SÜMEYYE ÜÇÜNCÜ</h1>
+		return `
+			<div class="stars"></div>
+			${this.expired ? '' : '<div class="twinkling"></div>'}
+			${this.expired ? '' : '<div class="clouds"></div>'}
+			<div id="countdown">
+				<h1 id="namesurname" class="typed-text--font-family"></h1>
+				${this.expired
+					? birthdayTemplate
+					: '<div id="clock"></div>'
+				}
+			</div>
+		`;
+	}
+}
+
+class Content {
+	constructor() {
+		this.activePage = 0;
+
+	}
+
+	init() {
+		activeRoute = 'content';
 	}
 
 	render() {
 		return `
-			<div class="stars"></div>
-			<div class="twinkling"></div>
-			<div class="clouds"></div>
-			<div id="countdown">
-				<h1>SÜMEYYE ÜÇÜNCÜ</h1>
-				<div id="clock"></div>
+			<div>
+
 			</div>
 		`;
 	}
 }
 
 const router = {
-	images: new ImagesPage(),
-	countdown: new CountDown(),
+	countdown: CountDown,
+	content: Content,
 };
 let activeRoute = 'countdown';
 
-
 $(document).ready(() => {
-	$('#app').html(router[activeRoute].render());
-	router[activeRoute].init();
+	renderApp();
 });
+
+function renderApp() {
+	const Component = new router[activeRoute]();
+	$('#app').html(Component.render());
+	Component.init();
+}
