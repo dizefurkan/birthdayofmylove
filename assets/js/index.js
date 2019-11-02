@@ -169,11 +169,13 @@ class CountDown {
 	}
 
 	showMessage() {
-		const element = `<div id="typedtext" class="typed-text--font-family"></div>`;
+		const element = `<div class="modal"><div id="typedtext" class="typed-text--font-family"></div></div>`;
 		$('.message-box').remove();
 		$('.birthday').append(element);
-  	const texts = ["İyi ki doğdun sevgilim, birlikte nice senelere, sağlıkla ve mutlulukla :)",
-  	"imza: said furkan dize"]
+  	const texts = [
+	  	"İyi ki doğdun sevgilim, birlikte nice senelere, sağlıkla ve mutlulukla :)",
+	  	"imza: said furkan dize"
+  	]
 		const typeWriter = new TypeWriter({
 			words: texts,
 			elementId: 'typedtext',

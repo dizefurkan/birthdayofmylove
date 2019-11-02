@@ -169,24 +169,57 @@ header a, a:visited {
 }
 
 @import url('https://fonts.googleapis.com/css?family=Merienda+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Merienda+One&display=swap');
 .typed-text--font-family {
 	font-family: 'Merienda One', cursive !important;
 }
 #typedtext {
 	font-size: 18px;
 	font-weight: bold;
-	position: absolute;
 	margin: 10px;
 	text-align: center;
   color: #fff;
-  top: 0;
   z-index: 1;
   background: #000000;
-  border: 1px solid;
 }
 
 .message-box {
 	z-index: 10;
   color: #fff;
   position: absolute;
+  animation: highlight 1s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  opacity: 0;
+}
+
+.modal {
+  margin: 10px;
+  position: absolute;
+  z-index: 1;
+  background: #000000;
+  border: 1px dashed #fff;
+  animation: height 1s;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+}
+
+@keyframes height {
+  from {
+  	height: 50px;
+  	width: 50px;
+  }
+  to {
+  	height: calc(100% - 20px);
+	  width: calc(100% - 20px);
+  }
+}
+
+@keyframes highlight {
+  from {
+  	opacity: 0;
+  }
+  to {
+  	opacity: 1;
+  }
 }
